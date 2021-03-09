@@ -8,6 +8,8 @@
 <!-- Custom scripts for all pages-->
 <script src="<?= base_url('assets'); ?>/js/sb-admin-2.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
-
+<!-- dataTable -->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+
+<!-- Sweetalert2 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
