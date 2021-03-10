@@ -8,6 +8,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
 use App\Models\JabatanModel;
+use App\Models\PegawaiModel;
 
 /**
  * Class BaseController
@@ -49,5 +50,6 @@ class BaseController extends Controller
 		// E.g.: $this->session = \Config\Services::session();
 		$this->session = \Config\Services::session();
 		$this->JabatanModel = new JabatanModel();
+		$this->PegawaiModel = new PegawaiModel();
 	}
 }

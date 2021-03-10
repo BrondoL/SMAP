@@ -8,7 +8,7 @@
                 <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                         Total Pegawai</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">5 Pegawai</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="viewjumlah"></span> Pegawai</div>
                 </div>
                 <div class="col-auto">
                     <i class="fas fa-id-card-alt fa-2x text-gray-300"></i>
@@ -24,82 +24,57 @@
         <h6 class="m-0 font-weight-bold text-primary">Daftar Pegawai Perusahaan</h6>
     </div>
     <div class="ml-3 mt-2">
-        <button type="button" class="btn btn-primary tomboltambah" data-toggle="modal" data-target="#mahasiswaModal">
+        <button type="button" class="btn btn-primary tomboltambah">
             <i class="fa fa-plus-circle"></i> Tambah Data
         </button>
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $no = 1; ?>
-                    <tr>
-                        <td><?= $no++; ?></td>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                        <td>
-                            <button class="btn btn-warning btn-sm" onclick="edit(<?= 1; ?>)"><i class="fa fa-tags"></i></button>
-                            <button class="btn btn-danger btn-sm" onclick="hapus(<?= 1; ?>)"><i class="fa fa-trash"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><?= $no++; ?></td>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011/07/25</td>
-                        <td>$170,750</td>
-                        <td>
-                            <button class="btn btn-warning btn-sm" onclick="edit(<?= 1; ?>)"><i class="fa fa-tags"></i></button>
-                            <button class="btn btn-danger btn-sm" onclick="hapus(<?= 1; ?>)"><i class="fa fa-trash"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><?= $no++; ?></td>
-                        <td>Ashton Cox</td>
-                        <td>Junior Technical Author</td>
-                        <td>San Francisco</td>
-                        <td>66</td>
-                        <td>2009/01/12</td>
-                        <td>$86,000</td>
-                        <td>
-                            <button class="btn btn-warning btn-sm" onclick="edit(<?= 1; ?>)"><i class="fa fa-tags"></i></button>
-                            <button class="btn btn-danger btn-sm" onclick="hapus(<?= 1; ?>)"><i class="fa fa-trash"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="viewdata"></div>
         </div>
     </div>
 </div>
+
+<div class="viewmodal"></div>
 <?= $this->endSection(); ?>
 
 <?= $this->section('myscript'); ?>
 
 <script>
+    function datapegawai() {
+        $.ajax({
+            url: "<?= base_url('Pegawai/fetch_data'); ?>",
+            dataType: "json",
+            success: function(response) {
+                $('.viewdata').html(response.data);
+            }
+        });
+    }
+
+    function jumlahpegawai() {
+        $.ajax({
+            url: "<?= base_url('Pegawai/getJumlah'); ?>",
+            dataType: "json",
+            success: function(response) {
+                $('.viewjumlah').html(response.data);
+            }
+        });
+    }
+
     $(document).ready(function() {
-        $('#dataTable').DataTable({
-            "columnDefs": [{
-                "targets": [7],
-                "orderable": false,
-            }]
+        datapegawai();
+        jumlahpegawai();
+
+        $('.tomboltambah').click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= base_url('Pegawai/form_tambah'); ?>",
+                dataType: "json",
+                success: function(response) {
+                    $('.viewmodal').html(response.data).show();
+                    $('#modaltambah').modal('show');
+                }
+            });
         });
     });
 </script>
