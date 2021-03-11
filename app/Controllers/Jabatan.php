@@ -36,10 +36,10 @@ class Jabatan extends BaseController
         $request = \Config\Services::request();
         if ($request->isAJAX()) {
             $data = [
-                'jumlah' => $this->JabatanModel->selectCount('id')->get()->getRowArray()
+                'jumlah' => $this->JabatanModel->selectCount('id_jabatan')->get()->getRowArray()
             ];
             $msg = [
-                'data' => $data['jumlah']['id']
+                'data' => $data['jumlah']['id_jabatan']
             ];
 
             echo json_encode($msg);
@@ -53,8 +53,8 @@ class Jabatan extends BaseController
         $request = \Config\Services::request();
         if ($request->isAJAX()) {
 
-            $jumlah = $this->JabatanModel->selectCount('id')->get()->getRowArray();
-            $jumlah = $jumlah['id'] + 1;
+            $jumlah = $this->JabatanModel->selectCount('id_jabatan')->get()->getRowArray();
+            $jumlah = $jumlah['id_jabatan'] + 1;
             $data['jumlah'] = $jumlah;
 
             $msg = [
@@ -111,14 +111,14 @@ class Jabatan extends BaseController
         $request = \Config\Services::request();
         if ($request->isAJAX()) {
 
-            $jumlah = $this->JabatanModel->selectCount('id')->get()->getRowArray();
-            $jumlah = $jumlah['id'];
+            $jumlah = $this->JabatanModel->selectCount('id_jabatan')->get()->getRowArray();
+            $jumlah = $jumlah['id_jabatan'];
 
-            $id = $request->getVar('id');
-            $row = $this->JabatanModel->find($id);
+            $id_jabatan = $request->getVar('id');
+            $row = $this->JabatanModel->find($id_jabatan);
 
             $data = [
-                'id' => $row['id'],
+                'id' => $row['id_jabatan'],
                 'nama_jabatan' => $row['nama_jabatan'],
                 'level' => $row['level'],
                 'jumlah' => $jumlah
@@ -144,9 +144,9 @@ class Jabatan extends BaseController
                 'level'         => $request->getVar('level')
             ];
 
-            $id = $request->getVar('id');
+            $id_jabatan = $request->getVar('id');
 
-            $this->JabatanModel->update($id, $simpandata);
+            $this->JabatanModel->update($id_jabatan, $simpandata);
             $msg = [
                 'sukses' => 'Data berhasil diupdate'
             ];
@@ -163,9 +163,9 @@ class Jabatan extends BaseController
 
         if ($request->isAJAX()) {
 
-            $id = $request->getVar('id');
+            $id_jabatan = $request->getVar('id');
 
-            $this->JabatanModel->delete($id);
+            $this->JabatanModel->delete($id_jabatan);
             $msg = [
                 'sukses' => 'Data berhasil dihapus'
             ];

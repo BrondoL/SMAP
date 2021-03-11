@@ -15,8 +15,8 @@
                 <td><?= $j['nama_jabatan']; ?></td>
                 <td><?= $j['level']; ?></td>
                 <td>
-                    <button class="btn btn-warning btn-sm" onclick="edit(<?= $j['id']; ?>)"><i class="fa fa-tags"></i></button>
-                    <button class="btn btn-danger btn-sm" onclick="hapus(<?= $j['id']; ?>)"><i class="fa fa-trash"></i></button>
+                    <button class="btn btn-warning btn-sm" onclick="edit(<?= $j['id_jabatan']; ?>)"><i class="fa fa-tags"></i></button>
+                    <button class="btn btn-danger btn-sm" onclick="hapus(<?= $j['id_jabatan']; ?>)"><i class="fa fa-trash"></i></button>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -52,34 +52,38 @@
 
     function hapus(id) {
         Swal.fire({
-            title: 'Hapus',
-            text: "Yakin menghapus Jabatan ini ?",
+            title: 'Hapus data?',
+            text: `Apakah anda yakin menghapus data?`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya',
-            cencelButtonText: 'Tidak',
+            confirmButtonText: 'Ya!',
+            cancelButtonText: 'Tidak'
         }).then((result) => {
-            $.ajax({
-                type: "POST",
-                url: "<?= base_url('Jabatan/hapus'); ?>",
-                data: {
-                    id: id
-                },
-                dataType: "json",
-                success: function(response) {
-                    if (response.sukses) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil...',
-                            text: response.sukses,
-                        });
-                        datajabatan();
-                        jumlahjabatan();
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "<?= base_url('Jabatan/hapus') ?>",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        id: id
+                    },
+                    success: function(response) {
+                        if (response.sukses) {
+                            Swal.fire({
+                                title: "Berhasil!",
+                                text: response.sukses,
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            datajabatan();
+                            jumlahjabatan();
+                        }
                     }
-                }
-            });
+                });
+            }
         })
     }
 </script>

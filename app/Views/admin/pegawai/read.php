@@ -15,15 +15,15 @@
         <?php foreach ($pegawai as $p) : ?>
             <tr class="text-center">
                 <td class="align-middle"><?= $no++; ?></td>
-                <td class="align-middle"><img onclick="gambar(<?= $p['id'] ?>)" src="<?= base_url('uploads/pegawai/thumb') . '/thumb_' . $p['foto']; ?>" width="50px" class="img-thumbnail"></td>
+                <td class="align-middle"><img onclick="gambar(<?= $p['id_pegawai'] ?>)" src="<?= base_url('uploads/pegawai/thumb') . '/thumb_' . $p['foto']; ?>" width="50px" class="img-thumbnail"></td>
                 <td class="align-middle"><?= $p['nip']; ?></td>
                 <td class="align-middle"><?= $p['nama']; ?></td>
                 <td class="align-middle"><?= $p['telepon']; ?></td>
                 <td class="align-middle"><?= $p['nama_jabatan']; ?></td>
                 <td class="align-middle">
-                    <button class="btn btn-success btn-sm" onclick="detail(<?= $p['id']; ?>)"><i class="fa fa-eye"></i></button>
-                    <button class="btn btn-warning btn-sm" onclick="edit(<?= $p['id']; ?>)"><i class="fa fa-tags"></i></button>
-                    <button class="btn btn-danger btn-sm" onclick="hapus(<?= $p['id']; ?>)"><i class="fa fa-trash"></i></button>
+                    <button class="btn btn-success btn-sm" onclick="detail(<?= $p['id_pegawai']; ?>)"><i class="fa fa-eye"></i></button>
+                    <button class="btn btn-warning btn-sm" onclick="edit(<?= $p['id_pegawai']; ?>)"><i class="fa fa-tags"></i></button>
+                    <button class="btn btn-danger btn-sm" onclick="hapus(<?= $p['id_pegawai']; ?>)"><i class="fa fa-trash"></i></button>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -59,34 +59,38 @@
 
     function hapus(id) {
         Swal.fire({
-            title: 'Hapus',
-            text: "Yakin menghapus Jabatan ini ?",
+            title: 'Hapus data?',
+            text: `Apakah anda yakin menghapus data?`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya',
-            cencelButtonText: 'Tidak',
+            confirmButtonText: 'Ya!',
+            cancelButtonText: 'Tidak'
         }).then((result) => {
-            $.ajax({
-                type: "POST",
-                url: "<?= base_url('Pegawai/hapus'); ?>",
-                data: {
-                    id: id
-                },
-                dataType: "json",
-                success: function(response) {
-                    if (response.sukses) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil...',
-                            text: response.sukses,
-                        });
-                        datapegawai();
-                        jumlahpegawai();
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "<?= base_url('Pegawai/hapus') ?>",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        id: id
+                    },
+                    success: function(response) {
+                        if (response.sukses) {
+                            Swal.fire({
+                                title: "Berhasil!",
+                                text: response.sukses,
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            datapegawai();
+                            jumlahpegawai();
+                        }
                     }
-                }
-            });
+                });
+            }
         })
     }
 

@@ -19,7 +19,7 @@ class Pegawai extends BaseController
         $request = \Config\Services::request();
         if ($request->isAJAX()) {
             $data = [
-                'pegawai' => $this->PegawaiModel->join('jabatan', 'jabatan.id = pegawai.jabatan')->get()->getResultArray()
+                'pegawai' => $this->PegawaiModel->join('jabatan', 'jabatan.id_jabatan = pegawai.jabatan')->get()->getResultArray()
             ];
             $msg = [
                 'data' => view('admin/pegawai/read', $data)
@@ -36,10 +36,10 @@ class Pegawai extends BaseController
         $request = \Config\Services::request();
         if ($request->isAJAX()) {
             $data = [
-                'jumlah' => $this->PegawaiModel->selectCount('id')->get()->getRowArray()
+                'jumlah' => $this->PegawaiModel->selectCount('id_jabatan')->get()->getRowArray()
             ];
             $msg = [
-                'data' => $data['jumlah']['id']
+                'data' => $data['jumlah']['id_jabatan']
             ];
 
             echo json_encode($msg);
@@ -164,7 +164,7 @@ class Pegawai extends BaseController
             $row = $this->PegawaiModel->find($id);
 
             $data = [
-                'id' => $row['id'],
+                'id' => $row['id_pegawai'],
                 'foto' => $row['foto']
             ];
 
@@ -245,7 +245,7 @@ class Pegawai extends BaseController
             $jabatan = $this->JabatanModel->findAll();
 
             $data = [
-                'id' => $row['id'],
+                'id' => $row['id_pegawai'],
                 'nip' => $row['nip'],
                 'nama' => $row['nama'],
                 'telepon' => $row['telepon'],
@@ -302,7 +302,15 @@ class Pegawai extends BaseController
 
             $id = $request->getVar('id');
 
+            $cekdata = $this->PegawaiModel->find($id);
+            $fotolama = $cekdata['foto'];
+            if ($fotolama != "default.png") {
+                unlink('uploads/pegawai' . '/' . $fotolama);
+                unlink('uploads/pegawai/thumb' . '/thumb_' . $fotolama);
+            }
+
             $this->PegawaiModel->delete($id);
+
             $msg = [
                 'sukses' => 'Data berhasil dihapus'
             ];

@@ -51,7 +51,7 @@
                     <div class="col-sm-8">
                         <select class="form-select form-control" aria-label="Default select example" name="jabatan">
                             <?php foreach ($jabatan as $j) : ?>
-                                <option value="<?= $j['id']; ?>"><?= $j['nama_jabatan']; ?></option>
+                                <option value="<?= $j['id_jabatan']; ?>"><?= $j['nama_jabatan']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
