@@ -47,6 +47,25 @@
         </div>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="index.html">
+            <i class="fas fa-fw fa-briefcase"></i>
+            <span>Proyek</span></a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item <?php if ($head == 'Arsip Surat') echo 'active'; ?>">
+        <a class=" nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSurat" aria-expanded="true" aria-controls="collapseSurat">
+            <i class="fas fa-fw fa-file-word"></i>
+            <span>Arsip Surat</span>
+        </a>
+        <div id="collapseSurat" class="collapse" aria-labelledby="headingSurat" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?= base_url('Jabatan'); ?>">Surat Masuk</a>
+                <a class="collapse-item" href="<?= base_url('Pegawai'); ?>">Surat Keluar</a>
+            </div>
+        </div>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
 

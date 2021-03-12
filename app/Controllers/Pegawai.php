@@ -36,10 +36,10 @@ class Pegawai extends BaseController
         $request = \Config\Services::request();
         if ($request->isAJAX()) {
             $data = [
-                'jumlah' => $this->PegawaiModel->selectCount('id_jabatan')->get()->getRowArray()
+                'jumlah' => $this->PegawaiModel->selectCount('id_pegawai')->get()->getRowArray()
             ];
             $msg = [
-                'data' => $data['jumlah']['id_jabatan']
+                'data' => $data['jumlah']['id_pegawai']
             ];
 
             echo json_encode($msg);
