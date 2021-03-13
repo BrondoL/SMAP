@@ -195,3 +195,145 @@ CRITICAL - 2021-03-12 02:03:32 --> Table 'SMAP.perusahaan' doesn't exist
 #9 /var/www/html/SMAP/public/index.php(44): CodeIgniter\CodeIgniter->run()
 #10 /var/www/html/SMAP/system/Commands/Server/rewrite.php(45): require_once('/var/www/html/S...')
 #11 {main}
+ERROR - 2021-03-12 20:50:13 --> mysqli_sql_exception: Unknown column 'id_user' in 'field list' in /var/www/html/SMAP/system/Database/MySQLi/Connection.php:314
+Stack trace:
+#0 /var/www/html/SMAP/system/Database/MySQLi/Connection.php(314): mysqli->query('SELECT COUNT(`i...')
+#1 /var/www/html/SMAP/system/Database/BaseConnection.php(713): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(`i...')
+#2 /var/www/html/SMAP/system/Database/BaseConnection.php(641): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(`i...')
+#3 /var/www/html/SMAP/system/Database/BaseBuilder.php(1866): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(`i...', Array, false)
+#4 /var/www/html/SMAP/system/Model.php(836): CodeIgniter\Database\BaseBuilder->get()
+#5 /var/www/html/SMAP/app/Controllers/User.php(39): CodeIgniter\Model->__call('get', Array)
+#6 /var/www/html/SMAP/system/CodeIgniter.php(936): App\Controllers\User->getJumlah()
+#7 /var/www/html/SMAP/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#8 /var/www/html/SMAP/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /var/www/html/SMAP/public/index.php(44): CodeIgniter\CodeIgniter->run()
+#10 /var/www/html/SMAP/system/Commands/Server/rewrite.php(45): require_once('/var/www/html/S...')
+#11 {main}
+CRITICAL - 2021-03-12 20:50:13 --> Unknown column 'id_user' in 'field list'
+#0 /var/www/html/SMAP/system/Database/MySQLi/Connection.php(314): mysqli->query('SELECT COUNT(`i...')
+#1 /var/www/html/SMAP/system/Database/BaseConnection.php(713): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(`i...')
+#2 /var/www/html/SMAP/system/Database/BaseConnection.php(641): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(`i...')
+#3 /var/www/html/SMAP/system/Database/BaseBuilder.php(1866): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(`i...', Array, false)
+#4 /var/www/html/SMAP/system/Model.php(836): CodeIgniter\Database\BaseBuilder->get()
+#5 /var/www/html/SMAP/app/Controllers/User.php(39): CodeIgniter\Model->__call('get', Array)
+#6 /var/www/html/SMAP/system/CodeIgniter.php(936): App\Controllers\User->getJumlah()
+#7 /var/www/html/SMAP/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#8 /var/www/html/SMAP/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /var/www/html/SMAP/public/index.php(44): CodeIgniter\CodeIgniter->run()
+#10 /var/www/html/SMAP/system/Commands/Server/rewrite.php(45): require_once('/var/www/html/S...')
+#11 {main}
+CRITICAL - 2021-03-12 20:57:01 --> Call to undefined method CodeIgniter\Database\MySQLi\Builder::findAll()
+#0 /var/www/html/SMAP/system/CodeIgniter.php(936): App\Controllers\User->form_tambah()
+#1 /var/www/html/SMAP/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#2 /var/www/html/SMAP/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /var/www/html/SMAP/public/index.php(44): CodeIgniter\CodeIgniter->run()
+#4 /var/www/html/SMAP/system/Commands/Server/rewrite.php(45): require_once('/var/www/html/S...')
+#5 {main}
+CRITICAL - 2021-03-12 20:58:21 --> Undefined variable: jabatan
+#0 /var/www/html/SMAP/app/Views/admin/user/create.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/var/www/html/S...', 53, Array)
+#1 /var/www/html/SMAP/system/View/View.php(220): include('/var/www/html/S...')
+#2 /var/www/html/SMAP/system/View/View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 /var/www/html/SMAP/system/Common.php(1217): CodeIgniter\View\View->render('admin/user/crea...', Array, true)
+#4 /var/www/html/SMAP/app/Controllers/User.php(62): view('admin/user/crea...', Array)
+#5 /var/www/html/SMAP/system/CodeIgniter.php(936): App\Controllers\User->form_tambah()
+#6 /var/www/html/SMAP/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#7 /var/www/html/SMAP/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /var/www/html/SMAP/public/index.php(44): CodeIgniter\CodeIgniter->run()
+#9 /var/www/html/SMAP/system/Commands/Server/rewrite.php(45): require_once('/var/www/html/S...')
+#10 {main}
+CRITICAL - 2021-03-12 21:00:49 --> Undefined index: id_role
+#0 /var/www/html/SMAP/app/Views/admin/user/create.php(45): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/var/www/html/S...', 45, Array)
+#1 /var/www/html/SMAP/system/View/View.php(220): include('/var/www/html/S...')
+#2 /var/www/html/SMAP/system/View/View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 /var/www/html/SMAP/system/Common.php(1217): CodeIgniter\View\View->render('admin/user/crea...', Array, true)
+#4 /var/www/html/SMAP/app/Controllers/User.php(62): view('admin/user/crea...', Array)
+#5 /var/www/html/SMAP/system/CodeIgniter.php(936): App\Controllers\User->form_tambah()
+#6 /var/www/html/SMAP/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#7 /var/www/html/SMAP/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /var/www/html/SMAP/public/index.php(44): CodeIgniter\CodeIgniter->run()
+#9 /var/www/html/SMAP/system/Commands/Server/rewrite.php(45): require_once('/var/www/html/S...')
+#10 {main}
+CRITICAL - 2021-03-12 21:27:50 --> Undefined index: id_pegawai
+#0 /var/www/html/SMAP/app/Controllers/User.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/var/www/html/S...', 232, Array)
+#1 /var/www/html/SMAP/system/CodeIgniter.php(936): App\Controllers\User->form_edit()
+#2 /var/www/html/SMAP/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#3 /var/www/html/SMAP/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /var/www/html/SMAP/public/index.php(44): CodeIgniter\CodeIgniter->run()
+#5 /var/www/html/SMAP/system/Commands/Server/rewrite.php(45): require_once('/var/www/html/S...')
+#6 {main}
+CRITICAL - 2021-03-12 21:27:50 --> Undefined index: id_pegawai
+#0 /var/www/html/SMAP/app/Controllers/User.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/var/www/html/S...', 232, Array)
+#1 /var/www/html/SMAP/system/CodeIgniter.php(936): App\Controllers\User->form_edit()
+#2 /var/www/html/SMAP/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#3 /var/www/html/SMAP/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /var/www/html/SMAP/public/index.php(44): CodeIgniter\CodeIgniter->run()
+#5 /var/www/html/SMAP/system/Commands/Server/rewrite.php(45): require_once('/var/www/html/S...')
+#6 {main}
+CRITICAL - 2021-03-12 21:27:51 --> Undefined index: id_pegawai
+#0 /var/www/html/SMAP/app/Controllers/User.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/var/www/html/S...', 232, Array)
+#1 /var/www/html/SMAP/system/CodeIgniter.php(936): App\Controllers\User->form_edit()
+#2 /var/www/html/SMAP/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#3 /var/www/html/SMAP/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /var/www/html/SMAP/public/index.php(44): CodeIgniter\CodeIgniter->run()
+#5 /var/www/html/SMAP/system/Commands/Server/rewrite.php(45): require_once('/var/www/html/S...')
+#6 {main}
+CRITICAL - 2021-03-12 21:28:01 --> Undefined index: id_pegawai
+#0 /var/www/html/SMAP/app/Controllers/User.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/var/www/html/S...', 232, Array)
+#1 /var/www/html/SMAP/system/CodeIgniter.php(936): App\Controllers\User->form_edit()
+#2 /var/www/html/SMAP/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#3 /var/www/html/SMAP/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /var/www/html/SMAP/public/index.php(44): CodeIgniter\CodeIgniter->run()
+#5 /var/www/html/SMAP/system/Commands/Server/rewrite.php(45): require_once('/var/www/html/S...')
+#6 {main}
+CRITICAL - 2021-03-12 21:28:02 --> Undefined index: id_pegawai
+#0 /var/www/html/SMAP/app/Controllers/User.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/var/www/html/S...', 232, Array)
+#1 /var/www/html/SMAP/system/CodeIgniter.php(936): App\Controllers\User->form_edit()
+#2 /var/www/html/SMAP/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#3 /var/www/html/SMAP/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /var/www/html/SMAP/public/index.php(44): CodeIgniter\CodeIgniter->run()
+#5 /var/www/html/SMAP/system/Commands/Server/rewrite.php(45): require_once('/var/www/html/S...')
+#6 {main}
+CRITICAL - 2021-03-12 21:28:02 --> Undefined index: id_pegawai
+#0 /var/www/html/SMAP/app/Controllers/User.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/var/www/html/S...', 232, Array)
+#1 /var/www/html/SMAP/system/CodeIgniter.php(936): App\Controllers\User->form_edit()
+#2 /var/www/html/SMAP/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#3 /var/www/html/SMAP/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /var/www/html/SMAP/public/index.php(44): CodeIgniter\CodeIgniter->run()
+#5 /var/www/html/SMAP/system/Commands/Server/rewrite.php(45): require_once('/var/www/html/S...')
+#6 {main}
+CRITICAL - 2021-03-12 21:28:25 --> Undefined variable: nip
+#0 /var/www/html/SMAP/app/Views/admin/pegawai/update.php(18): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/var/www/html/S...', 18, Array)
+#1 /var/www/html/SMAP/system/View/View.php(220): include('/var/www/html/S...')
+#2 /var/www/html/SMAP/system/View/View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 /var/www/html/SMAP/system/Common.php(1217): CodeIgniter\View\View->render('admin/pegawai/u...', Array, true)
+#4 /var/www/html/SMAP/app/Controllers/User.php(240): view('admin/pegawai/u...', Array)
+#5 /var/www/html/SMAP/system/CodeIgniter.php(936): App\Controllers\User->form_edit()
+#6 /var/www/html/SMAP/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#7 /var/www/html/SMAP/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /var/www/html/SMAP/public/index.php(44): CodeIgniter\CodeIgniter->run()
+#9 /var/www/html/SMAP/system/Commands/Server/rewrite.php(45): require_once('/var/www/html/S...')
+#10 {main}
+CRITICAL - 2021-03-12 21:28:25 --> Undefined variable: nip
+#0 /var/www/html/SMAP/app/Views/admin/pegawai/update.php(18): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/var/www/html/S...', 18, Array)
+#1 /var/www/html/SMAP/system/View/View.php(220): include('/var/www/html/S...')
+#2 /var/www/html/SMAP/system/View/View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 /var/www/html/SMAP/system/Common.php(1217): CodeIgniter\View\View->render('admin/pegawai/u...', Array, true)
+#4 /var/www/html/SMAP/app/Controllers/User.php(240): view('admin/pegawai/u...', Array)
+#5 /var/www/html/SMAP/system/CodeIgniter.php(936): App\Controllers\User->form_edit()
+#6 /var/www/html/SMAP/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#7 /var/www/html/SMAP/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /var/www/html/SMAP/public/index.php(44): CodeIgniter\CodeIgniter->run()
+#9 /var/www/html/SMAP/system/Commands/Server/rewrite.php(45): require_once('/var/www/html/S...')
+#10 {main}
+CRITICAL - 2021-03-12 21:28:26 --> Undefined variable: nip
+#0 /var/www/html/SMAP/app/Views/admin/pegawai/update.php(18): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/var/www/html/S...', 18, Array)
+#1 /var/www/html/SMAP/system/View/View.php(220): include('/var/www/html/S...')
+#2 /var/www/html/SMAP/system/View/View.php(222): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 /var/www/html/SMAP/system/Common.php(1217): CodeIgniter\View\View->render('admin/pegawai/u...', Array, true)
+#4 /var/www/html/SMAP/app/Controllers/User.php(240): view('admin/pegawai/u...', Array)
+#5 /var/www/html/SMAP/system/CodeIgniter.php(936): App\Controllers\User->form_edit()
+#6 /var/www/html/SMAP/system/CodeIgniter.php(432): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+#7 /var/www/html/SMAP/system/CodeIgniter.php(333): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /var/www/html/SMAP/public/index.php(44): CodeIgniter\CodeIgniter->run()
+#9 /var/www/html/SMAP/system/Commands/Server/rewrite.php(45): require_once('/var/www/html/S...')
+#10 {main}

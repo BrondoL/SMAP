@@ -2,16 +2,16 @@
 
 namespace App\Controllers;
 
-class Pegawai extends BaseController
+class User extends BaseController
 {
     public function index()
     {
         $data = [
-            'title' => "SMAP - Pegawai",
-            'head' => "Pegawai"
+            'title' => "SMAP - User",
+            'head' => "User"
         ];
 
-        return view('admin/pegawai/index', $data);
+        return view('admin/user/index', $data);
     }
 
     public function fetch_data()
@@ -19,10 +19,10 @@ class Pegawai extends BaseController
         $request = \Config\Services::request();
         if ($request->isAJAX()) {
             $data = [
-                'pegawai' => $this->PegawaiModel->join('jabatan', 'jabatan.id_jabatan = pegawai.jabatan')->get()->getResultArray()
+                'user' => $this->UserModel->join('role', 'role.role = user.role_id')->get()->getResultArray()
             ];
             $msg = [
-                'data' => view('admin/pegawai/read', $data)
+                'data' => view('admin/user/read', $data)
             ];
 
             echo json_encode($msg);
@@ -36,10 +36,10 @@ class Pegawai extends BaseController
         $request = \Config\Services::request();
         if ($request->isAJAX()) {
             $data = [
-                'jumlah' => $this->PegawaiModel->selectCount('id_pegawai')->get()->getRowArray()
+                'jumlah' => $this->UserModel->selectCount('id_user')->get()->getRowArray()
             ];
             $msg = [
-                'data' => $data['jumlah']['id_pegawai']
+                'data' => $data['jumlah']['id_user']
             ];
 
             echo json_encode($msg);
@@ -54,11 +54,12 @@ class Pegawai extends BaseController
         $request = \Config\Services::request();
         if ($request->isAJAX()) {
 
-            $jabatan = $this->JabatanModel->findAll();
-            $data['jabatan'] = $jabatan;
+            $builder = $this->db->table('role');
+            $role = $builder->get()->getResultArray();
+            $data['role'] = $role;
 
             $msg = [
-                'data' => view('admin/pegawai/create', $data)
+                'data' => view('admin/user/create', $data)
             ];
 
             echo json_encode($msg);
@@ -74,78 +75,59 @@ class Pegawai extends BaseController
         if ($request->isAJAX()) {
             $validation = \Config\Services::validation();
             $valid = $this->validate([
-                'nip' => [
-                    'label' => 'NIP',
-                    'rules' => 'required|is_unique[pegawai.nip]',
+                'username' => [
+                    'label' => 'Username',
+                    'rules' => 'required|is_unique[user.username]',
                     'errors' => [
                         'required' => '{field} tidak boleh kosong',
                         'is_unique' => '{field} tersebut sudah ada'
                     ]
                 ],
-                'nama' => [
-                    'label' => 'Nama',
-                    'rules' => 'required',
-                    'errors' => [
-                        'required' => '{field} tidak boleh kosong',
-                    ]
-                ],
-                'telepon' => [
-                    'label' => 'Nomor Telepon',
-                    'rules' => 'required|is_unique[pegawai.telepon]|integer',
-                    'errors' => [
-                        'required' => '{field} tidak boleh kosong',
-                        'is_unique' => '{field} tersebut sudah ada',
-                        'integer' => '{field} salah'
-                    ]
-                ],
                 'email' => [
                     'label' => 'Email',
-                    'rules' => 'required|is_unique[pegawai.email]|valid_email',
+                    'rules' => 'required|is_unique[user.email]|valid_email',
                     'errors' => [
                         'required' => '{field} tidak boleh kosong',
                         'is_unique' => '{field} tersebut sudah ada',
                         'valid_email' => '{field} salah'
                     ]
                 ],
-                'gaji' => [
-                    'label' => 'Gaji',
-                    'rules' => 'required',
+                'password' => [
+                    'label' => 'Password',
+                    'rules' => 'required|min_length[3]',
                     'errors' => [
-                        'required' => '{field} tidak boleh kosong'
+                        'required' => '{field} tidak boleh kosong',
+                        'min_length' => '{field} terlalu pendek'
                     ]
                 ],
-                'mulai' => [
-                    'label' => 'Tanggal Mulai Bekerja',
-                    'rules' => 'required',
+                'password2' => [
+                    'label' => 'Confirm Password',
+                    'rules' => 'required|matches[password]',
                     'errors' => [
-                        'required' => '{field} tidak boleh kosong'
+                        'required' => '{field} tidak boleh kosong',
+                        'matches' => '{field} tidak cocok'
                     ]
                 ]
             ]);
             if (!$valid) {
                 $msg = [
                     'error' => [
-                        'nip'       => $validation->getError('nip'),
-                        'nama'      => $validation->getError('nama'),
-                        'telepon'   => $validation->getError('telepon'),
-                        'email'     => $validation->getError('email'),
-                        'gaji'      => $validation->getError('gaji'),
-                        'mulai'     => $validation->getError('mulai')
+                        'username'       => $validation->getError('username'),
+                        'email'      => $validation->getError('email'),
+                        'password'   => $validation->getError('password'),
+                        'password2'     => $validation->getError('password2')
                     ]
                 ];
             } else {
                 $simpandata = [
-                    'nip'           => $request->getVar('nip'),
-                    'nama'          => $request->getVar('nama'),
-                    'telepon'       => $request->getVar('telepon'),
-                    'email'         => $request->getVar('email'),
-                    'gaji_pokok'    => $request->getVar('gaji'),
-                    'mulai_bekerja' => $request->getVar('mulai'),
-                    'jabatan'       => $request->getVar('jabatan'),
+                    'username'           => $request->getVar('username'),
+                    'email'          => $request->getVar('email'),
+                    'password'       => password_hash($request->getVar('telepon'), PASSWORD_DEFAULT),
+                    'role_id'         => $request->getVar('role'),
                     'foto'          => "default.png"
                 ];
 
-                $this->PegawaiModel->insert($simpandata);
+                $this->UserModel->insert($simpandata);
                 $msg = [
                     'sukses' => 'Data berhasil disimpan'
                 ];
@@ -162,15 +144,15 @@ class Pegawai extends BaseController
         if ($request->isAJAX()) {
 
             $id = $request->getVar('id');
-            $row = $this->PegawaiModel->find($id);
+            $row = $this->UserModel->find($id);
 
             $data = [
-                'id' => $row['id_pegawai'],
+                'id' => $row['id_user'],
                 'foto' => $row['foto']
             ];
 
             $msg = [
-                'sukses' => view('admin/pegawai/upload', $data)
+                'sukses' => view('admin/user/upload', $data)
             ];
 
             echo json_encode($msg);
@@ -187,7 +169,7 @@ class Pegawai extends BaseController
 
             $valid = $this->validate([
                 'foto' => [
-                    'label' => 'Foto Pegawai',
+                    'label' => 'Foto User',
                     'rules' => 'uploaded[foto]|max_size[foto, 1024]|mime_in[foto,image/png,image/jpg,image/jpeg]|is_image[foto]',
                     'errors' => [
                         'uploaded'  => '{field} belum diupload',
@@ -206,12 +188,12 @@ class Pegawai extends BaseController
             } else {
 
                 $id = $request->getVar('id');
-                $cekdata = $this->PegawaiModel->find($id);
+                $cekdata = $this->UserModel->find($id);
                 $fotolama = $cekdata['foto'];
 
                 if ($fotolama != 'default.png') {
-                    unlink('uploads/pegawai' . '/' . $fotolama);
-                    unlink('uploads/pegawai/thumb' . '/thumb_' . $fotolama);
+                    unlink('uploads/user' . '/' . $fotolama);
+                    unlink('uploads/user/thumb' . '/thumb_' . $fotolama);
                 }
 
                 $filegambar = $request->getFile('foto');
@@ -220,13 +202,13 @@ class Pegawai extends BaseController
                     'foto' => $filegambar->getName()
                 ];
 
-                $this->PegawaiModel->update($id, $updatedata);
+                $this->UserModel->update($id, $updatedata);
 
                 \Config\Services::image()
                     ->withFile($filegambar)
                     ->fit(800, 533, 'center')
-                    ->save('uploads/pegawai/thumb/' . 'thumb_' .  $filegambar->getName());
-                $filegambar->move('uploads/pegawai');
+                    ->save('uploads/user/thumb/' . 'thumb_' .  $filegambar->getName());
+                $filegambar->move('uploads/user');
                 $msg = [
                     'sukses' => 'Gambar berhasil diupload!'
                 ];
@@ -241,24 +223,21 @@ class Pegawai extends BaseController
         if ($request->isAJAX()) {
 
             $id = $request->getVar('id');
-            $row = $this->PegawaiModel->find($id);
+            $row = $this->UserModel->find($id);
 
-            $jabatan = $this->JabatanModel->findAll();
+            $builder = $this->db->table('role');
+            $role = $builder->get()->getResultArray();
 
             $data = [
-                'id' => $row['id_pegawai'],
-                'nip' => $row['nip'],
-                'nama' => $row['nama'],
-                'telepon' => $row['telepon'],
+                'id' => $row['id_user'],
+                'username' => $row['username'],
                 'email' => $row['email'],
-                'jabatan' => $row['jabatan'],
-                'gaji' => $row['gaji_pokok'],
-                'mulai' => $row['mulai_bekerja'],
-                'nama_jabatan' => $jabatan
+                'role_id' => $row['role_id'],
+                'role' => $role
             ];
 
             $msg = [
-                'sukses' => view('admin/pegawai/update', $data)
+                'sukses' => view('admin/user/update', $data)
             ];
 
             echo json_encode($msg);
@@ -272,23 +251,57 @@ class Pegawai extends BaseController
         $request = \Config\Services::request();
 
         if ($request->isAJAX()) {
-            $simpandata = [
-                'nip'           => $request->getVar('nip'),
-                'nama'          => $request->getVar('nama'),
-                'telepon'       => $request->getVar('telepon'),
-                'email'         => $request->getVar('email'),
-                'gaji_pokok'    => $request->getVar('gaji'),
-                'mulai_bekerja' => $request->getVar('mulai'),
-                'jabatan'       => $request->getVar('jabatan'),
-            ];
+            $validation = \Config\Services::validation();
+            $valid = $this->validate([
+                'username' => [
+                    'label' => 'Username',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong',
+                    ]
+                ],
+                'email' => [
+                    'label' => 'Email',
+                    'rules' => 'required|valid_email',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong',
+                        'valid_email' => '{field} salah'
+                    ]
+                ],
+                'password2' => [
+                    'label' => 'Confirm Password',
+                    'rules' => 'matches[password]',
+                    'errors' => [
+                        'matches' => '{field} tidak cocok'
+                    ]
+                ]
+            ]);
+            if (!$valid) {
+                $msg = [
+                    'error' => [
+                        'username'   => $validation->getError('username'),
+                        'email'      => $validation->getError('email'),
+                        'password2'  => $validation->getError('password2')
+                    ]
+                ];
+            } else {
+                $simpandata = [
+                    'username'  => $request->getVar('username'),
+                    'email'     => $request->getVar('email'),
+                    'role_id'      => $request->getVar('role'),
+                ];
 
-            $id = $request->getVar('id');
+                if ($request->getVar('password') != NULL) {
+                    $simpandata['password'] = password_hash($request->getVar('password'), PASSWORD_DEFAULT);
+                }
 
-            $this->PegawaiModel->update($id, $simpandata);
-            $msg = [
-                'sukses' => 'Data berhasil diupdate'
-            ];
+                $id = $request->getVar('id');
 
+                $this->UserModel->update($id, $simpandata);
+                $msg = [
+                    'sukses' => 'Data berhasil diupdate'
+                ];
+            }
             echo json_encode($msg);
         } else {
             exit(view('error'));
@@ -303,14 +316,14 @@ class Pegawai extends BaseController
 
             $id = $request->getVar('id');
 
-            $cekdata = $this->PegawaiModel->find($id);
+            $cekdata = $this->UserModel->find($id);
             $fotolama = $cekdata['foto'];
             if ($fotolama != "default.png") {
-                unlink('uploads/pegawai' . '/' . $fotolama);
-                unlink('uploads/pegawai/thumb' . '/thumb_' . $fotolama);
+                unlink('uploads/user' . '/' . $fotolama);
+                unlink('uploads/user/thumb' . '/thumb_' . $fotolama);
             }
 
-            $this->PegawaiModel->delete($id);
+            $this->UserModel->delete($id);
 
             $msg = [
                 'sukses' => 'Data berhasil dihapus'

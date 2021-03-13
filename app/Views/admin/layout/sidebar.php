@@ -113,10 +113,10 @@
             <span>Profiles</span></a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="index.html">
-            <i class="fas fa-fw fa-user-cog"></i>
-            <span>User</span></a>
+    <li class="nav-item <?php if ($head == 'User') echo 'active'; ?>"">
+        <a class=" nav-link" href="<?= base_url('User'); ?>">
+        <i class="fas fa-fw fa-user-cog"></i>
+        <span>User</span></a>
     </li>
 
     <!-- Divider -->
