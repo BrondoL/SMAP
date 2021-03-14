@@ -48,6 +48,23 @@ class Pegawai extends BaseController
         }
     }
 
+    public function getGaji()
+    {
+        $request = \Config\Services::request();
+        if ($request->isAJAX()) {
+            $data = [
+                'jumlah' => $this->PegawaiModel->selectSum('gaji_pokok')->get()->getRowArray()
+            ];
+            $msg = [
+                'data' => number_format($data['jumlah']['gaji_pokok'], 2, ',', '.')
+            ];
+
+            echo json_encode($msg);
+        } else {
+            exit(view('error'));
+        }
+    }
+
 
     public function form_tambah()
     {
@@ -287,6 +304,36 @@ class Pegawai extends BaseController
             $this->PegawaiModel->update($id, $simpandata);
             $msg = [
                 'sukses' => 'Data berhasil diupdate'
+            ];
+
+            echo json_encode($msg);
+        } else {
+            exit(view('error'));
+        }
+    }
+
+    public function show_detail()
+    {
+        $request = \Config\Services::request();
+        if ($request->isAJAX()) {
+
+            $id = $request->getVar('id');
+            $row = $this->PegawaiModel->join('jabatan', 'jabatan.id_jabatan = pegawai.jabatan')->where('id_pegawai', $id)->get()->getRowArray();
+
+            $data = [
+                'id'        => $row['id_pegawai'],
+                'nip'       => $row['nip'],
+                'nama'      => $row['nama'],
+                'telepon'   => $row['telepon'],
+                'email'     => $row['email'],
+                'jabatan'   => $row['nama_jabatan'],
+                'gaji'      => $row['gaji_pokok'],
+                'mulai'     => $row['mulai_bekerja'],
+                'foto'      => $row['foto']
+            ];
+
+            $msg = [
+                'sukses' => view('admin/pegawai/detail', $data)
             ];
 
             echo json_encode($msg);

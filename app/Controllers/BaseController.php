@@ -10,6 +10,7 @@ use Psr\Log\LoggerInterface;
 use App\Models\JabatanModel;
 use App\Models\PegawaiModel;
 use App\Models\UserModel;
+use App\Models\ProfileModel;
 
 /**
  * Class BaseController
@@ -54,5 +55,6 @@ class BaseController extends Controller
 		$this->JabatanModel = new JabatanModel();
 		$this->PegawaiModel = new PegawaiModel();
 		$this->UserModel = new UserModel();
+		$this->ProfileModel = new ProfileModel();
 	}
 }

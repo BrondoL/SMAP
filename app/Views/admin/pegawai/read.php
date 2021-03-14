@@ -40,6 +40,23 @@
         });
     });
 
+    function detail(id) {
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url('Pegawai/show_detail'); ?>",
+            data: {
+                id: id
+            },
+            dataType: "json",
+            success: function(response) {
+                if (response.sukses) {
+                    $('.viewmodal').html(response.sukses).show();
+                    $('#modaldetail').modal('show');
+                }
+            }
+        });
+    }
+
     function edit(id) {
         $.ajax({
             type: "POST",
@@ -87,6 +104,7 @@
                             });
                             datapegawai();
                             jumlahpegawai();
+                            totalgaji();
                         }
                     }
                 });

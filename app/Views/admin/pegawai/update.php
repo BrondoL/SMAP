@@ -113,6 +113,7 @@
                     $('#modaledit').modal('hide');
                     datapegawai();
                     jumlahpegawai();
+                    totalgaji();
                 }
             });
         });

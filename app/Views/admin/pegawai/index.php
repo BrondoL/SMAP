@@ -1,17 +1,35 @@
 <?= $this->extend('admin/layout/index'); ?>
 <?= $this->section('content'); ?>
 
-<div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-primary shadow h-100 py-2">
-        <div class="card-body">
-            <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                        Total Pegawai</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="viewjumlah"></span> Pegawai</div>
+<div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Total Pegawai</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><span class="viewjumlah"></span> Pegawai</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-id-card-alt fa-2x text-gray-300"></i>
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <i class="fas fa-id-card-alt fa-2x text-gray-300"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Total Gaji Pegawai</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <span class="viewgaji"></span></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,9 +79,20 @@
         });
     }
 
+    function totalgaji() {
+        $.ajax({
+            url: "<?= base_url('Pegawai/getGaji'); ?>",
+            dataType: "json",
+            success: function(response) {
+                $('.viewgaji').html(response.data);
+            }
+        });
+    }
+
     $(document).ready(function() {
         datapegawai();
         jumlahpegawai();
+        totalgaji();
 
         $('.tomboltambah').click(function(e) {
             e.preventDefault();

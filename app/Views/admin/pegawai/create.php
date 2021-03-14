@@ -155,6 +155,7 @@
                         $('#modaltambah').modal('hide');
                         datapegawai();
                         jumlahpegawai();
+                        totalgaji();
                     }
                 }
             });
