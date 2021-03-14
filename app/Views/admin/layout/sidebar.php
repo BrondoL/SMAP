@@ -25,7 +25,7 @@
             <span>Visit Site</span></a>
     </li>
 
-    <?php if (session()->get('role') == 3 or session()->get('role') == 1) : ?>
+    <?php if (session()->get('role') == 2 or session()->get('role') == 1) : ?>
         <!-- Divider -->
         <hr class="sidebar-divider">
 
@@ -68,7 +68,7 @@
             </div>
         </li>
     <?php endif; ?>
-    <?php if (session()->get('role') == 2 or session()->get('role') == 1) : ?>
+    <?php if (session()->get('role') == 3 or session()->get('role') == 1) : ?>
         <!-- Divider -->
         <hr class="sidebar-divider">
 
