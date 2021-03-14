@@ -20,7 +20,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="<?= base_url(); ?>" target="_blank">
             <i class=" fas fa-fw fa-globe"></i>
             <span>Visit Site</span></a>
     </li>
@@ -113,7 +113,7 @@
         </div>
 
         <li class="nav-item <?php if ($head == 'Profile') echo 'active'; ?>">
-            <a class="nav-link" href="<?= base_url('Profile'); ?>">
+            <a class="nav-link" href="<?= base_url('Konfigurasi'); ?>">
                 <i class="fas fa-fw fa-cogs"></i>
                 <span>Profiles</span></a>
         </li>

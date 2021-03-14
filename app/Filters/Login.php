@@ -12,7 +12,7 @@ class Login implements FilterInterface
     {
         // Do something here
         if (!session('login')) {
-            return redirect()->to(base_url('Auth'));
+            return redirect()->to(base_url('Login'));
         }
     }
 

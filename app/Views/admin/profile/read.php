@@ -1,90 +1,82 @@
 <div class="row">
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <i class="mdi mdi-image-filter-hdr"></i> Foto Profile User <br>
+                <small>*Klik foto untuk mengganti foto.</small>
+                <hr>
+                <div class="form-group text-center">
+                    <img class="img-thumbnail logoweb" onclick="foto(<?= $profile['id_user']; ?>)" src="<?= base_url('uploads/user/' . $profile['foto']); ?>" width="200px" alt="Foto">
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-lg-8">
-        <div class="card mb-4">
+        <div class="card">
             <?= form_open('Profile/submit', ['class' => 'formtambah']) ?>
             <div class="card-body">
-                <i class="mdi mdi-circle-edit-outline"></i> Konfigurasi Website
+                <i class="mdi mdi-circle-edit-outline"></i> Konfigurasi Profile
                 <hr>
-                <input type="hidden" class="form-control" id="konfigurasi_id" value="<?= $profile[0]['id']; ?>" name="konfigurasi_id" readonly>
-                <div class="form-group">
-                    <label> <i class="mdi mdi-text-shadow"></i>
-                        Nama Perusahaan
-                    </label>
-                    <input type="text" id="nama_web" value="<?= $profile[0]['nama_pt']; ?>" name="nama_web" class="form-control">
-                    <div class="invalid-feedback errorNama">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label> <i class=" mdi mdi-playlist-star"></i>
-                        Deskripsi
-                    </label>
-                    <textarea rows="5" type="text" id="deskripsi" name="deskripsi" class="form-control"><?= $profile[0]['profile_pt']; ?></textarea>
-                </div>
+                <input type="hidden" class="form-control" id="konfigurasi_id" name="konfigurasi_id" readonly>
 
                 <div class="row">
                     <div class="form-group col-md-6 col-12">
-                        <label> <i class="mdi mdi-instagram"></i>
-                            Instagram
+                        <label> <i class="mdi mdi-account"></i>
+                            Username
                         </label>
-                        <input type="text" id="instagram" name="instagram" value="<?= $profile[0]['instagram']; ?>" class="form-control">
-                    </div>
-
-                    <div class="form-group col-md-6 col-12">
-                        <label> <i class="mdi mdi-facebook"></i>
-                            Facebook
-                        </label>
-                        <input type="text" id="facebook" name="facebook" value="<?= $profile[0]['facebook']; ?>" class="form-control">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-md-6 col-12">
-                        <label> <i class="mdi mdi-whatsapp"></i>
-                            Whatsapp
-                        </label>
-                        <input type="text" id="whatsapp" name="whatsapp" value="<?= $profile[0]['whatsapp']; ?>" class="form-control">
+                        <input type="text" id="username" name="username" value="<?= $profile['username']; ?>" class="form-control">
+                        <div class="invalid-feedback errorUsername">
+                        </div>
                     </div>
 
                     <div class="form-group col-md-6 col-12">
                         <label> <i class="mdi mdi-email"></i>
                             Email
                         </label>
-                        <input type="text" id="email" name="email" value="<?= $profile[0]['email']; ?>" class="form-control">
+                        <input type="email" id="email" name="email" value="<?= $profile['email']; ?>" class="form-control">
+                        <div class="invalid-feedback errorEmail">
+                        </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-group col-md-6 col-12">
-                        <label> <i class="mdi mdi-phone"></i>
-                            Telepon Kantor
+                        <label> <i class="mdi mdi-lock"></i>
+                            Password
                         </label>
-                        <input type="text" id="telepon" name="telepon" value="<?= $profile[0]['no_telp']; ?>" class="form-control">
+                        <input type="password" id="password" name="password" class="form-control">
+                        <small><span>Kosongkan password jika tidak ingin diubah</span></small>
+                    </div>
+
+                    <div class="form-group col-md-6 col-12">
+                        <label> <i class="mdi mdi-lock-alert"></i>
+                            Confirm Password
+                        </label>
+                        <input type="password" id="password2" name="password2" class="form-control">
+                        <div class="invalid-feedback errorPassword">
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label> <i class="mdi mdi-office-building"></i>
-                        Alamat
-                    </label>
-                    <input type="text" id="alamat" name="alamat" value="<?= $profile[0]['tempat']; ?>" class="form-control">
+                <div class="row">
+                    <div class="form-group col-md-6 col-12">
+                        <label> <i class="mdi mdi-account-star"></i>
+                            Role
+                        </label>
+                        <input type="text" id="role" name="role" value="<?= $profile['nama']; ?>" class="form-control" readonly>
+                    </div>
+
+                    <div class="form-group col-md-6 col-12">
+                        <label> <i class="mdi mdi-timer"></i>
+                            Last Login
+                        </label>
+                        <input type="text" id="login" name="login" value="<?= $profile['last_login']; ?>" class="form-control" readonly>
+                    </div>
                 </div>
 
                 <button type="submit" class="mt-2 btn btn-primary btnsimpan"><i class="fa fa-paper-plane"></i> Update</button>
             </div>
             <?= form_close() ?>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="card mb-4">
-            <div class="card-body">
-                <i class="mdi mdi-image-filter-hdr"></i> Logo Website <br>
-                <small>*Klik foto untuk mengganti foto.</small>
-                <hr>
-                <div class="form-group text-center">
-                    <img class="img-thumbnail logoweb" onclick="logo(<?= $profile[0]['id']; ?>)" src="<?= base_url('uploads/profile/thumb' . '/thumb_' . $profile[0]['logo_pt']); ?>" width="200px" alt="Foto">
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -96,15 +88,10 @@
             type: "POST",
             url: $(this).attr('action'),
             data: {
-                konfigurasi_id: $('input#konfigurasi_id').val(),
-                nama_web: $('input#nama_web').val(),
-                deskripsi: $('textarea#deskripsi').val(),
-                instagram: $('input#instagram').val(),
-                facebook: $('input#facebook').val(),
-                whatsapp: $('input#whatsapp').val(),
-                telepon: $('input#telepon').val(),
+                username: $('input#username').val(),
                 email: $('input#email').val(),
-                alamat: $('input#alamat').val(),
+                password: $('input#password').val(),
+                password2: $('input#password2').val(),
             },
             dataType: "json",
             beforeSend: function() {
@@ -117,12 +104,26 @@
             },
             success: function(response) {
                 if (response.error) {
-                    if (response.error.nama_web) {
-                        $('#nama_web').addClass('is-invalid');
-                        $('.errorNama').html(response.error.nama_web);
+                    if (response.error.username) {
+                        $('#username').addClass('is-invalid');
+                        $('.errorUsername').html(response.error.username);
                     } else {
-                        $('#nama_web').removeClass('is-invalid');
-                        $('.errorNama').html('');
+                        $('#username').removeClass('is-invalid');
+                        $('.errorUsername').html('');
+                    }
+                    if (response.error.email) {
+                        $('#email').addClass('is-invalid');
+                        $('.errorEmail').html(response.error.email);
+                    } else {
+                        $('#email').removeClass('is-invalid');
+                        $('.errorEmail').html('');
+                    }
+                    if (response.error.password) {
+                        $('#password2').addClass('is-invalid');
+                        $('.errorPassword').html(response.error.password);
+                    } else {
+                        $('#password2').removeClass('is-invalid');
+                        $('.errorPassword').html('');
                     }
                 } else {
                     Swal.fire({
@@ -132,7 +133,7 @@
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    dataprofile();
+                    dataprofileuser();
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -141,10 +142,10 @@
         });
     })
 
-    function logo(id) {
+    function foto(id) {
         $.ajax({
             type: "POST",
-            url: "<?= site_url('Profile/formuploadlogo') ?>",
+            url: "<?= Base_url('Profile/formuploadlogo') ?>",
             data: {
                 id: id
             },
@@ -153,24 +154,6 @@
                 if (response.sukses) {
                     $('.viewmodal').html(response.sukses).show();
                     $('#modalupload').modal('show');
-                }
-            }
-        });
-    }
-
-    function icon(konfigurasi_id) {
-        $.ajax({
-            type: "post",
-            url: "<?= site_url('konfigurasi/formuploadicon') ?>",
-            data: {
-                konfigurasi_id: konfigurasi_id
-            },
-            dataType: "json",
-            success: function(response) {
-                if (response.sukses) {
-                    $('.viewmodal').html(response.sukses).show();
-                    $('#modalupload').modal('show');
-
                 }
             }
         });

@@ -9,9 +9,9 @@
 <?= $this->section('myscript'); ?>
 
 <script>
-    function dataprofileuser() {
+    function dataprofile() {
         $.ajax({
-            url: "<?= base_url('Profile/fetch_data'); ?>",
+            url: "<?= base_url('Konfigurasi/fetch_data'); ?>",
             dataType: "json",
             success: function(response) {
                 $('.viewdata').html(response.data);
@@ -20,7 +20,7 @@
     }
 
     $(document).ready(function() {
-        dataprofileuser();
+        dataprofile();
     });
 </script>
 

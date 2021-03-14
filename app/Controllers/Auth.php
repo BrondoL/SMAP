@@ -45,6 +45,8 @@ class Auth extends BaseController
                         ];
 
                         $this->session->set($simpan_session);
+                        date_default_timezone_set('Asia/Jakarta');
+                        $this->UserModel->update($row['id_user'], ['last_login' => date('Y-m-d H:i:s')]);
 
                         $msg = [
                             'sukses' => [
@@ -71,6 +73,6 @@ class Auth extends BaseController
     public function logout()
     {
         $this->session->destroy();
-        return redirect()->to(base_url('Auth'));
+        return redirect()->to(base_url('Login'));
     }
 }

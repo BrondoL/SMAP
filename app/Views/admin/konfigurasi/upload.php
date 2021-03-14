@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Upload Foto Profile User</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Upload Logo Perusahaan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,14 +12,14 @@
             <?= csrf_field(); ?>
             <br>
             <center>
-                <img class="img-thumbnail img-preview" width="50%" src="<?= base_url('uploads/user') . '/' . $foto; ?>" alt="Logo PT">
+                <img class="img-thumbnail img-preview" width="50%" src="<?= base_url('uploads/profile') . '/' . $foto; ?>" alt="Logo PT">
             </center>
             <div class="modal-body">
                 <input type="hidden" value="<?= $id ?>" name="id">
                 <div class="div-col-sm-9 mb-3">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="foto" name="foto" onchange="previewImg()">
-                        <label class="custom-file-label" for="foto">Foto Profile User</label>
+                        <label class="custom-file-label" for="foto">Logo Perusahaan</label>
                         <div class="ml-1 invalid-feedback errorFoto">
 
                         </div>
@@ -67,7 +67,7 @@
 
             $.ajax({
                 type: "POST",
-                url: '<?= base_url('Profile/doupload') ?>',
+                url: '<?= base_url('Konfigurasi/douploadlogo') ?>',
                 data: data,
                 enctype: 'multipart/form-data',
                 processData: false,
@@ -100,7 +100,7 @@
                             timer: 1500
                         });
                         $('#modalupload').modal('hide');
-                        dataprofileuser();
+                        dataprofile();
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
