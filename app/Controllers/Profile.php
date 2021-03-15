@@ -37,12 +37,14 @@ class Profile extends BaseController
         $request = \Config\Services::request();
         if ($request->isAJAX()) {
             $validation = \Config\Services::validation();
+            $row = $this->UserModel->find(session()->get('user_id'));
+
             $rulesUsername = 'required';
-            if ($request->getVar('username') != session()->get('username')) {
+            if ($request->getVar('username') != $row['username']) {
                 $rulesUsername = 'required|is_unique[user.username]';
             }
             $rulesEmail = 'required|valid_email';
-            if ($request->getVar('email') != session()->get('email')) {
+            if ($request->getVar('email') != $row['email']) {
                 $rulesEmail = 'required|is_unique[user.email]';
             }
             $valid = $this->validate([
@@ -88,7 +90,7 @@ class Profile extends BaseController
                     $simpandata['password'] = password_hash($request->getVar('password'), PASSWORD_DEFAULT);
                 }
 
-                $id = session()->get('user_id');
+                $id = $row['id_user'];
                 $this->UserModel->update($id, $simpandata);
                 $msg = [
                     'sukses' => 'Data berhasil diupdate'
